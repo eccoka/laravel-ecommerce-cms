@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\LeaderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +39,14 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+});
+Route::middleware(['auth', 'role:leader'])->group(function () {
+    Route::get('/leader/dashboard', [LeaderController::class, 'leaderDashboard'])->name('leader.dashboard');
+});
+Route::middleware(['auth', 'role:agent'])->group(function () {
+    Route::get('/agent/dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
+});
+
