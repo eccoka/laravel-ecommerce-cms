@@ -42,6 +42,8 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/reguserform', [AdminController::class, 'showRegUserForm'])->name('admin.reguserform');
+    Route::post('/admin/userreg', [AdminController::class, 'storeUser'])->name('admin.userreg');
 });
 Route::middleware(['auth', 'role:leader'])->group(function () {
     Route::get('/leader/dashboard', [LeaderController::class, 'leaderDashboard'])->name('leader.dashboard');
