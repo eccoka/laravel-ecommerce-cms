@@ -8,6 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+const showingNavigationMenu = ref(false);
 
 // const roles = ref($page.props.roles);
 
@@ -21,35 +22,20 @@ const showingNavigationDropdown = ref(false);
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('admin.dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
-                                </Link>
-                            </div>
-
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('admin.reguserform')" :active="route().current('admin.reguserform')">
-                                    User Reg
-                                </NavLink>
+
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
+                                <Dropdown align="right" width="48" >
                                     <template #trigger>
-                                        <span class="inline-flex rounded-md">
+                                        <span class="inline-flex rounded-md ">
                                             <button
+
                                                 type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
@@ -70,7 +56,6 @@ const showingNavigationDropdown = ref(false);
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
@@ -80,7 +65,6 @@ const showingNavigationDropdown = ref(false);
                                 </Dropdown>
                             </div>
                         </div>
-
                         <!-- Hamburger -->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
@@ -124,7 +108,11 @@ const showingNavigationDropdown = ref(false);
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
-
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('admin.reguserform')" >
+                            User Reg
+                        </ResponsiveNavLink>
+                    </div>
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
@@ -151,10 +139,38 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </header>
 
+            <!-- Page Menu -->
+            <div class="grid grid-cols-8 gap-4">
+
+                    <div class="py-4 pl-2 ">
+                        <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+
+                                <div class="grid grid-flow-row auto-rows-max ">
+                                                            <!-- Navigation Links -->
+                                                            <div class="hidden text-white sm:flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                <Link :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
+                                                                    <span class="ms-3">Dashboard</span>
+                                                                </Link>
+
+                                                            </div>
+                                                            <div class="hidden text-white sm:flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                <Link :href="route('admin.reguserform')" >
+                                                                    <span class="ms-3">User Reg</span>
+                                                                </Link>
+                                                            </div>
+                                </div>
+
+
+                        </div>
+                    </div>
+
+                <div class="py-4 col-span-6">
             <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+                    <main>
+                        <slot />
+                    </main>
+                </div>
+            </div>
         </div>
     </div>
 </template>
